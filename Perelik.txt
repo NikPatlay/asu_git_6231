@@ -12,4 +12,3 @@ LICENSE
 Perelik.txt
 README.md
 vector_battle_regular.typeface.js
-.
