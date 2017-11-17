@@ -1211,4 +1211,90 @@ $(function () {
   });
 });
 
+//<<<<<<< master
+//<<<<<<< HEAD
 // vim: fdl=0
+      for (var j = 0; j < gridHeight; j++) {
+        context.moveTo(0, j * GRID_SIZE);
+        context.lineTo(Game.canvasWidth, j * GRID_SIZE);
+      }
+      context.closePath();
+      context.stroke();
+    }
+
+    thisFrame = Date.now();
+    elapsed = thisFrame - lastFrame;
+    lastFrame = thisFrame;
+    delta = elapsed / 30;
+
+    for (i = 0; i < sprites.length; i++) {
+
+      sprites[i].run(delta);
+
+      if (sprites[i].reap) {
+        sprites[i].reap = false;
+        sprites.splice(i, 1);
+        i--;
+      }
+    }
+
+    // score
+    var score_text = ''+Game.score;
+    Text.renderText(score_text, 18, Game.canvasWidth - 14 * score_text.length, 20);
+
+    // extra dudes
+    for (i = 0; i < Game.lives; i++) {
+      context.save();
+      extraDude.x = Game.canvasWidth - (8 * (i + 1));
+      extraDude.y = 32;
+      extraDude.configureTransform();
+      extraDude.draw();
+      context.restore();
+    }
+
+    if (showFramerate) {
+      Text.renderText(''+avgFramerate, 24, Game.canvasWidth - 38, Game.canvasHeight - 2);
+    }
+
+    frameCount++;
+    elapsedCounter += elapsed;
+    if (elapsedCounter > 1000) {
+      elapsedCounter -= 1000;
+      avgFramerate = frameCount;
+      frameCount = 0;
+    }
+
+    if (paused) {
+      Text.renderText('PAUSED', 72, Game.canvasWidth/2 - 160, 120);
+    } else {
+      requestAnimFrame(mainLoop, canvasNode);
+    }
+  };
+
+  mainLoop();
+
+  $(window).keydown(function (e) {
+    switch (KEY_CODES[e.keyCode]) {
+      case 'f': // show framerate
+        showFramerate = !showFramerate;
+        break;
+      case 'p': // pause
+        paused = !paused;
+        if (!paused) {
+          // start up again
+          lastFrame = Date.now();
+          mainLoop();
+        }
+        break;
+      case 'm': // mute
+        SFX.muted = !SFX.muted;
+        break;
+    }
+  });
+});
+
+// vim: fdl=0
+//>>>>>>> New game.js
+//=======
+// vim: fdl=0
+//>>>>>>> feature/a_is6231
