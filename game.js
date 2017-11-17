@@ -1211,7 +1211,8 @@ $(function () {
   });
 });
 
-<<<<<<< HEAD
+//<<<<<<< master
+//<<<<<<< HEAD
 // vim: fdl=0
       for (var j = 0; j < gridHeight; j++) {
         context.moveTo(0, j * GRID_SIZE);
@@ -1293,6 +1294,7 @@ $(function () {
 });
 
 // vim: fdl=0
-=======
+//>>>>>>> New game.js
+//=======
 // vim: fdl=0
->>>>>>> New game.js
+//>>>>>>> feature/a_is6231
